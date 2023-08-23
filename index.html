@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lembretes de Atividades</title>
+<style>
+  /* Estilos CSS para melhorar a aparência */
+</style>
+</head>
+<body>
+<h1>Lembretes de Atividades</h1>
+
+<!-- Formulário de criação -->
+<h2>Criar Lembrete</h2>
+<form id="create-form">
+  <input type="text" id="title" placeholder="Título" required>
+  <input type="text" id="description" placeholder="Descrição" required></textarea>
+  <input type="date" id="expiration" required>
+  <button type="submit">Criar</button>
+</form>
+
+<!-- Lista de lembretes -->
+<h2>Lista de Lembretes</h2>
+<ul id="reminder-list">
+  <!-- Os itens da lista serão adicionados aqui dinamicamente -->
+</ul>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const createForm = document.getElementById('create-form');
+  const reminderList = document.getElementById('reminder-list');
+  
+  // Array para armazenar os lembretes
+  const reminders = [];
+  
+  // Função para exibir a lista de lembretes
+  function displayReminders() {
+    reminderList.innerHTML = '';
+    reminders.forEach((reminder, index) => {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `
+        <h3>${reminder.title}</h3>
+        <p>${reminder.description}</p>
+        <p>Expira em: ${reminder.expiration}</p>
+        <button class="edit-button" data-index="${index}">Editar</button>
+        <button class="delete-button" data-index="${index}">Excluir</button>
+      `;
+      reminderList.appendChild(listItem);
+    });
+  }
+  
+  // Função para adicionar um novo lembrete
+  createForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const expiration = document.getElementById('expiration').value;
+    reminders.push({ title, description, expiration });
+    displayReminders();
+    createForm.reset();
+  });
+  
+  // Função para editar um lembrete
+  reminderList.addEventListener('click', function (e) {
+    if (e.target.classList.contains('edit-button')) {
+      const index = parseInt(e.target.getAttribute('data-index'));
+      const reminder = reminders[index];
+      const newTitle = prompt('Novo título:', reminder.title);
+      const newDescription = prompt('Nova descrição:', reminder.description);
+      const newExpiration = prompt('Nova data de expiração:', reminder.expiration);
+      reminders[index] = { title: newTitle, description: newDescription, expiration: newExpiration };
+      displayReminders();
+    }
+  });
+  
+  // Função para excluir um lembrete
+  reminderList.addEventListener('click', function (e) {
+    if (e.target.classList.contains('delete-button')) {
+      const index = parseInt(e.target.getAttribute('data-index'));
+      reminders.splice(index, 1);
+      displayReminders();
+    }
+  });
+});
+</script>
+</body>
+</html>
