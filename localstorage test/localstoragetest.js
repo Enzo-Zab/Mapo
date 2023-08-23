@@ -22,7 +22,3 @@ function del(){
   ul.innerHTML = '';
   itemsArray = [];
 }
-function del2(){
-    localStorage.removeItem(itemdel);
-    ul.innerHTML = '';
-}
