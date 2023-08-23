@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="styleSheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+      <div class="to-do-app">
+        <h2>To-do App</h2>
+        <br>
+        <input type="text" id="item" placeholder="Enter item...">
+        <br>
+        <br>
+        <button onclick="add()">Add Item <i class="fa-solid fa-plus"></i></button>
+        <button onclick="del()">Clear all <i class="fa-solid fa-ban"></i></button>
+        <br>
+        <br>
+        <input type="text" id="itemdel" placeholder="Enter item to remove">
+        <br>
+        <br>
+        <button onclick="del2()">Clear item <i class="fa-solid fa-ban"></i></button>
+      </div>
+      <ul class="to-do-list"></ul>
+    </div>
+  
+    <script src="localstoragetest.js"></script>
+  </body>
+</html>
