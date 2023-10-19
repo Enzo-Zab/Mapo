@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <Html>
 	<Head>
+		<link rel="stylesheet" href="style2.css">
 		<Title>Simple Slot Machine</Title>
+
 		
 		<script>
+			function Return(){
+				window.location.href = "../Opções/index7.html" 
+			}
 			function DoSpin() {
 				//All three slot’s images should be randomly selected 
 				//and displayed on the page.
@@ -87,19 +93,23 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="button" onclick="DoSpin()" value="Click To Spin"></td>
+				<td><input type="button" onclick="DoSpin()" value="Aperte!"></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td>Money:</td>
+				<td>Dinheiro:</td>
 				<td><input type="text" onchange="checkMoney()" style="width: 100px" name="money" value="20"></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td>Bet:</td>
+				<td>Aposte:</td>
 				<td><input type="text" onchange="checkBet()" style="width: 100px" name="bet" value="1"></td>
 				<td></td>
 			</tr>
 		</table>
+		
 	</Body>
+	
+		<br><br><input type="button" onclick="Return()" style="width: 100px;" value="Volte!">
+	
 </Html>
