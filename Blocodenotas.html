@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloco de Notas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .note-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .note {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .note button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="note-container">
+        <h1>Bloco de Notas</h1>
+        <input type="text" id="new-note" placeholder="Nova Nota">
+        <button onclick="createNote()">Adicionar</button>
+        <div id="notes"></div>
+    </div>
+
+    <script>
+        let notes = [];
+
+        function createNote() {
+            const noteText = document.getElementById('new-note').value;
+            if (noteText.trim() !== "") {
+                const note = {
+                    text: noteText,
+                    id: Date.now()
+                };
+                notes.push(note);
+                displayNotes();
+                document.getElementById('new-note').value = "";
+            }
+        }
+
+        function displayNotes() {
+            const notesContainer = document.getElementById('notes');
+            notesContainer.innerHTML = '';
+            notes.forEach(note => {
+                const noteElement = document.createElement('div');
+                noteElement.className = 'note';
+                noteElement.innerHTML = `
+                    <p>${note.text}</p>
+                    <button onclick="editNote(${note.id})">Editar</button>
+                    <button onclick="deleteNote(${note.id})">Excluir</button>
+                `;
+                notesContainer.appendChild(noteElement);
+            });
+        }
+
+        function editNote(noteId) {
+            const noteIndex = notes.findIndex(note => note.id === noteId);
+            if (noteIndex !== -1) {
+                const updatedText = prompt("Editar nota:", notes[noteIndex].text);
+                if (updatedText !== null) {
+                    notes[noteIndex].text = updatedText;
+                    displayNotes();
+                }
+            }
+        }
+
+        function deleteNote(noteId) {
+            const noteIndex = notes.findIndex(note => note.id === noteId);
+            if (noteIndex !== -1) {
+                notes.splice(noteIndex, 1);
+                displayNotes();
+            }
+        }
+
+        displayNotes();
+    </script>
+</body>
+</html>
